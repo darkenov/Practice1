@@ -1,3 +1,3 @@
-x = str(3)    # x will be '3' string
-y = int(3)    # y will be 3 number
-z = float(3)  # z will be 3.0 float number
+x = str(4)    # x will be '4' string
+y = int(4)    # y will be 4 number
+z = float(4)  # z will be 4.0 float number
