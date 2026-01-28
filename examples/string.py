@@ -8,3 +8,6 @@ print(a)
 #usual string:
 b="Hello world"
 print(b)
+print(b[:5])
+
+c=4.6
