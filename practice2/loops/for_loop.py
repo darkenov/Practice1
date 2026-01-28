@@ -11,8 +11,9 @@ for x in mytuple:
 mystr = "banana"
 for x in mystr:
   print(x)
-
-a=12
-for i in range(a):
-    if i%2==0:
-        print(i)
+  
+for x in range(6):
+  if x == 3: break
+  print(x)
+else:
+  print("Finally finished!")
