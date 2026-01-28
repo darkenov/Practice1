@@ -46,3 +46,14 @@ if number > 0:
   print("The number is positive")
 elif number < 0:
   print("The number is negative")
+
+c = 200
+d = 33
+e = 500
+if c > d and e > c:
+  print("Both conditions are True")
+
+f = 33
+g = 200
+if not f > g:
+  print("a is NOT greater than b")
