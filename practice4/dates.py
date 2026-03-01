@@ -24,3 +24,4 @@ a = datetime.strptime(input(), "%Y-%m-%d %H:%M:%S")
 b = datetime.strptime(input(), "%Y-%m-%d %H:%M:%S")
 
 print(int((b - a).total_seconds()))
+
