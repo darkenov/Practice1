@@ -1,44 +1,32 @@
-from pathlib import Path
+import os
 import shutil
 
-def main():
-    base = Path(__file__).parent
-    work = base / "workspace"
-    raw = work / "project" / "data" / "raw"
-    processed = work / "project" / "data" / "processed"
+raw = "workspace/project/data/raw"
+processed = "workspace/project/data/processed"
 
-    raw.mkdir(parents=True, exist_ok=True)
-    processed.mkdir(parents=True, exist_ok=True)
+os.makedirs(raw, exist_ok=True)
+os.makedirs(processed, exist_ok=True)
 
-    # Create test files (safe: only inside workspace/)
-    (raw / "one.txt").write_text("one\n", encoding="utf-8")
-    (raw / "two.txt").write_text("two\n", encoding="utf-8")
-    (raw / "three.csv").write_text("1,2,3\n", encoding="utf-8")
+# create simple test files
+open(raw + "/a.txt", "w").write("hello")
+open(raw + "/b.txt", "w").write("world")
+open(raw + "/c.csv", "w").write("1,2,3")
 
-    # 3) Find files by extension (example: .txt)
-    ext = ".txt"
-    found = list(raw.glob(f"*{ext}"))
+# 3) Find files by extension (.txt)
+for name in os.listdir(raw):
+    if name.endswith(".txt"):
+        print("Found:", name)
 
-    print(f"Found {len(found)} '{ext}' files in raw:")
-    for f in found:
-        print("-", f.name)
+# 4) Copy .txt files raw -> processed
+for name in os.listdir(raw):
+    if name.endswith(".txt"):
+        shutil.copy(raw + "/" + name, processed + "/" + name)
 
-    # 4) Copy files from raw -> processed
-    print("\nCopying .txt files from raw -> processed")
-    for f in found:
-        shutil.copy2(f, processed / f.name)
+print("Copied .txt files!")
 
-    print("Now in processed:")
-    print([p.name for p in processed.iterdir()])
+# Move .csv raw -> processed
+for name in os.listdir(raw):
+    if name.endswith(".csv"):
+        shutil.move(raw + "/" + name, processed + "/" + name)
 
-    # 4) Move files (example: move .csv)
-    print("\nMoving .csv files from raw -> processed")
-    for f in raw.glob("*.csv"):
-        shutil.move(str(f), str(processed / f.name))
-
-    print("\nAfter moving:")
-    print("raw:", [p.name for p in raw.iterdir()])
-    print("processed:", [p.name for p in processed.iterdir()])
-
-if __name__ == "__main__":
-    main()
+print("Moved .csv files!")
